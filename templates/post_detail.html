@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>
+        Post info
+    </title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Post info</h1>
+        <div id="result" class="text-success"></div>
+        <div id="badresult" class="text-danger"></div>
+        <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Title</th>
+                <td>{{post[0].title}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Content</th>
+                <td>{{post[0].content}}</td>
+              </tr>
+              <tr>
+                <th scope="row">User</th>
+                <td>{{post[0].owner.email}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Post id</th>
+                <td>{{post[0].id}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Date Posted</th>
+                <td>{{post[0].created_at}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Votes</th>
+                <td>{{post[1]}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button id="myBtn" class="btn btn-success" onclick="changeText({{post[0].id}})">Up Vote Post</button>
+
+    </div>
+    
+    
+    <script>
+      function changeText(id) {
+        fetch("/vote/"+id, {method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+        if (data.detail){
+          document.getElementById("badresult").innerHTML = data.detail
+        }
+        else{
+        document.getElementById("result").innerHTML = data.message
+        var btn = document.getElementById("myBtn");
+        btn.innerHTML = "Post voted!";
+        btn.disabled = true;
+        }
+      })
+      }
+    </script>
+{% endblock %}

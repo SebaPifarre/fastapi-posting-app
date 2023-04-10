@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Edit Post</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Edit post</h1>
+        {% for error in errors %}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+        {% endfor %}
+        <div id="result" class="text-success"></div>
+        <form>
+            <div class="mb-3">
+              <label for="title" class="form-label">Post's New Title</label>
+              <input type="text" class="form-control" id="title" required name="title" minlength="4" value="{{post.title}}" placeholder="enter post title">
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">Post's New Content</label>
+              <textarea class="form-control" id="content" required name="content" minlength="4" value="{{post.content}}" placeholder="Enter content">{{post.content}}</textarea>
+            </div>
+            <div class="from-text">Enter full post content in details.</details></div>
+            <!--<button type="submit" class="btn btn-primary">Update</button>-->
+        </form>
+        <button type="button" class="btn btn-primary" id="Edit">Update</button>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+    document.getElementById("Edit").addEventListener('click', function(event) {
+        if (!document.getElementById("title").checkValidity() || !document.getElementById("content").checkValidity()){
+            alert('Both fields need to have more than 4 characters.');
+            event.preventDefault();   
+        }
+        else {
+            update_post({{post.id}});
+        }
+    });
+    function update_post(id)
+    {
+        var data = {}
+        data["title"] = document.getElementById("title").value
+        data["content"] = document.getElementById("content").value
+        
+        fetch("/posts/update/"+id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
+        .then(response => response.json())
+        .then(data=> document.getElementById("result").innerHTML = data.message)
+    }
+    </script>
+{% endblock %}

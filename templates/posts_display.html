@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title> Posts </title>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="../static/css/posts_display.css">
+
+    <div class="container">
+        <h3>Posts!</h3>
+        <div class="posts-grid">
+            {% for post in posts %}
+                <div class="post">
+                {% with citem = post %}
+                    {% include 'card.html' %}
+                {% endwith %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

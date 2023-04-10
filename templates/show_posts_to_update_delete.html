@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Edit and Delete Post</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3 class="text-center">Edit / Delete Post</h3>
+        {% for error in errors %}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+          </div>
+        {% endfor %}
+        <div id="result" class="text-success"></div>
+        <div id="badresult" class="text-danger"></div>
+        <table id="datatable" class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{post.title}}</td>
+                        <td>{{post.content}}</td>
+                        <td>
+                            <a href="/update-a-post/{{post.id}}" class="btn btn-primary">Edit</a>
+                            <button type="button" class="btn btn-danger" onclick="delete_post({{post.id}})">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#datatable").DataTable()
+        });
+    </script>
+    <script>
+        function delete_post(id)
+        {
+            fetch("/posts/delete/"+id, {method: 'DELETE'})
+            .then(response => response.json())
+            .then(data => {
+            if (data.detail){
+            document.getElementById("badresult").innerHTML = data.detail
+            }
+            else{
+            document.getElementById("result").innerHTML = data.message
+            }
+            })
+        }
+    </script>
+{% endblock %}

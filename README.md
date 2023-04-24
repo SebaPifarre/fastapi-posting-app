@@ -25,6 +25,3 @@ The following API endpoints are available in the application:
 
 - Ricardo Sebastián Pifarré - https://fastapi_pifarre-1-t8668309.deta.app
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

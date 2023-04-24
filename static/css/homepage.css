@@ -1,0 +1,32 @@
+
+.container {
+  width: 100%;
+}
+h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.left {
+    width: 50%;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: left;
+}
+.right {
+    width: 50%;
+    float: right;
+    box-sizing: border-box;
+    font-size: small;
+    text-align: right;
+}
+.right img {
+    width: 100%;
+    height: auto;
+}
+
+.left img{
+    width: 20px;
+    height: 20px
+}

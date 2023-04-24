@@ -2,39 +2,10 @@
 
 {% block title %}
     <title> Home page </title>
+    <link rel="stylesheet" href="../static/css/homepage.css">
 {% endblock %}
 
 {% block content %}
-        <style>
-            .container {
-              width: 100%;
-            }
-            h3 {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            .left {
-              width: 50%;
-              float: left;
-              padding: 10px;
-              box-sizing: border-box;
-              text-align: left;
-            }
-            .right {
-              width: 50%;
-              float: right;
-              box-sizing: border-box;
-              font-size: small;
-              text-align: right;
-            }
-            .right img {
-              width: 100%;
-              height: auto;
-            }
-          </style>
-        </head>
-        <body>
           <div class="container">
             <h3> Welcome to my API! </h3>
                 {% if msg %}
@@ -46,7 +17,8 @@
               <p>This is a web application for uploading posts, you can create your own account in the account tab and start posting right away!<br>
                 You can see what other users are posting and vote on their posts.<br>
                 Also you can upload your own posts and once created, edit them or delete them.<br>
-                For more information about the app you can visit my github repository at <a href="https://github.com/SebaPifarre/fastapi-posting-app" target="_blank">Github</a></p>
+                For more information about the app you can visit my github repository at 
+                <a href="https://github.com/SebaPifarre/fastapi-posting-app" target="_blank">Github<img src="../static/images/github-mark.png" alt="Github logo"></a></p>
             </div>
             <div class="right">
               <img src="{{ url_for('static', path='images/brooke-cagle-tLG2hcpITZE-unsplash.jpg') }}" alt="Image">
@@ -55,5 +27,4 @@
               </div>
             </div>
           </div>
-        </body>
 {% endblock %}
